@@ -1,16 +1,11 @@
 <template>
-  <div class="froth">
-    <div
-      v-for=" in 5"
-      class="foam"
-      :style="{ backgroundColor: beverageStore.currentCreamer?.color }"
-    ></div>
+  <div v-if="beverageStore.currentCreamer.id !== 'c1'" class="froth" :style="{backgroundColor: beverageStore.currentCreamer.color}">
+    <div v-for="i in 5" :key="i" class="foam" :style="{backgroundColor: beverageStore.currentCreamer.color}"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useBeverageStore } from "../stores/beverageStore";
-
 const beverageStore = useBeverageStore();
 </script>
 <style lang="scss" scoped>

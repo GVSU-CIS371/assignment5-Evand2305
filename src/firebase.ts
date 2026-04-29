@@ -2,16 +2,17 @@ import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  //   // COPY this from your Firebase Console
-  //   apiKey: "your-api-key-goes-here",
-  //   authDomain: "your-project-name-here.firebaseapp.com",
-  //   databaseURL: "https://your-project-name-here.firebaseio.com",
-  //   projectId: "your-project-name-here",
-  //   storageBucket: "your-project-name.appspot.com",
-  //   messagingSenderId: "xxxxxxxx",
+  apiKey: "AIzaSyB6jCkV9C3GJBc_OlrEvHqyW8pCVXJFqps",
+  authDomain: "custom-drink-maker.firebaseapp.com",
+  projectId: "custom-drink-maker",
+  storageBucket: "custom-drink-maker.firebasestorage.app",
+  messagingSenderId: "372508337489",
+  databaseURL: "https://custom-drink-maker.firebaseio.com",
+  appId: "1:372508337489:web:b2b1316e39eb6372391f70",
+
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export default db;
+export { db };

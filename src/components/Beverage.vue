@@ -2,12 +2,28 @@
   <Mug>
     <Cold v-if="isIced" />
     <Hot v-else />
-    <Contents>
+    
+    <Contents v-if="isBaseOnly">
+      <template v-slot:bottom>
+        <Base />
+      </template>
+    </Contents>
+ 
+    <Contents v-else-if="isNoSyrup">
       <template v-slot:top>
-        <Creamer v-if="beverageStore.currentCreamer?.color !== 'transparent'" />
+        <Creamer />
+      </template>
+      <template v-slot:bottom>
+        <Base />
+      </template>
+    </Contents>
+
+    <Contents v-else>
+      <template v-slot:top>
+        <Creamer />
       </template>
       <template v-slot:mid>
-        <Syrup v-if="beverageStore.currentSyrup?.color !== 'transparent'" />
+        <Syrup />
       </template>
       <template v-slot:bottom>
         <Base />
@@ -23,8 +39,8 @@ import Base from "./Base.vue";
 import Creamer from "./Creamer.vue";
 import Hot from "./Hot.vue";
 import Cold from "./Cold.vue";
-
-import { useBeverageStore } from "../stores/beverageStore";
+import {computed} from "vue";
+import {useBeverageStore} from "../stores/beverageStore";
 
 const beverageStore = useBeverageStore();
 
@@ -32,4 +48,13 @@ type Props = {
   isIced: boolean;
 };
 defineProps<Props>();
+
+const isBaseOnly = computed(
+  () => beverageStore.currentCreamer.id === "c1" && beverageStore.currentSyrup.id === "s1"
+);
+ 
+const isNoSyrup = computed(
+  () => beverageStore.currentSyrup.id === "s1" && beverageStore.currentCreamer.id !== "c1"
+);
+
 </script>
